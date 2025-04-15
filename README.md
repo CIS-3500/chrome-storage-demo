@@ -6,6 +6,8 @@ This Chrome extension demonstrates the three main storage methods available to C
 2. **localStorage**
 3. **IndexedDB**
 
+![Chrome Storage Demo popup extension](https://raw.githubusercontent.com/CIS-3500/chrome-storage-demo/refs/heads/main/chrome-storage-demo-screenshot.png)
+
 ## Installation
 
 To install this extension in developer mode:
