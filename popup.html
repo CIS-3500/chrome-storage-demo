@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chrome Storage Demo</title>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      width: 500px;
+      padding: 15px;
+    }
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    .tabs {
+      display: flex;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+    .tab {
+      padding: 8px 16px;
+      cursor: pointer;
+      margin-right: 5px;
+      border: 1px solid #ccc;
+      border-bottom: none;
+      border-radius: 4px 4px 0 0;
+    }
+    .tab.active {
+      background-color: #4285f4;
+      color: white;
+    }
+    .tab-content {
+      display: none;
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 0 0 4px 4px;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    input, button, textarea {
+      margin: 5px 0;
+      padding: 8px;
+    }
+    input, textarea {
+      width: calc(100% - 20px);
+    }
+    button {
+      cursor: pointer;
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 12px;
+      margin-right: 5px;
+    }
+    .storage-item {
+      border: 1px solid #eee;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+    }
+    .storage-controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    .subtitle {
+      font-size: 0.8em;
+      color: #666;
+      margin-bottom: 10px;
+    }
+    .data-display {
+      background-color: #f5f5f5;
+      padding: 10px;
+      border-radius: 4px;
+      margin-top: 10px;
+      max-height: 150px;
+      overflow-y: auto;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Chrome Storage Demo</h1>
+    <p>Explore the three storage methods available in Chrome extensions</p>
+    
+    <div class="tabs">
+      <div class="tab active" data-tab="chrome-storage">chrome.storage API</div>
+      <div class="tab" data-tab="local-storage">localStorage</div>
+      <div class="tab" data-tab="indexed-db">IndexedDB</div>
+    </div>
+    
+    <!-- Chrome Storage API Tab -->
+    <div id="chrome-storage" class="tab-content active">
+      <div class="tabs sub-tabs">
+        <div class="tab active" data-tab="local-tab">chrome.storage.local</div>
+        <div class="tab" data-tab="sync-tab">chrome.storage.sync</div>
+        <div class="tab" data-tab="session-tab">chrome.storage.session</div>
+      </div>
+      
+      <div id="local-tab" class="tab-content active">
+        <div class="subtitle">Local storage: persists indefinitely, ~5MB+ limit</div>
+        <div class="storage-controls">
+          <input type="text" id="local-key" placeholder="Key">
+          <input type="text" id="local-value" placeholder="Value">
+          <button id="local-save">Save</button>
+          <button id="local-get">Get</button>
+          <button id="local-delete">Delete</button>
+          <button id="local-clear">Clear All</button>
+        </div>
+        <div id="local-data" class="data-display">No data</div>
+      </div>
+      
+      <div id="sync-tab" class="tab-content">
+        <div class="subtitle">Sync storage: syncs across devices, ~100KB total limit</div>
+        <div class="storage-controls">
+          <input type="text" id="sync-key" placeholder="Key">
+          <input type="text" id="sync-value" placeholder="Value">
+          <button id="sync-save">Save</button>
+          <button id="sync-get">Get</button>
+          <button id="sync-delete">Delete</button>
+          <button id="sync-clear">Clear All</button>
+        </div>
+        <div id="sync-data" class="data-display">No data</div>
+      </div>
+      
+      <div id="session-tab" class="tab-content">
+        <div class="subtitle">Session storage: persists only during browser session</div>
+        <div class="storage-controls">
+          <input type="text" id="session-key" placeholder="Key">
+          <input type="text" id="session-value" placeholder="Value">
+          <button id="session-save">Save</button>
+          <button id="session-get">Get</button>
+          <button id="session-delete">Delete</button>
+          <button id="session-clear">Clear All</button>
+        </div>
+        <div id="session-data" class="data-display">No data</div>
+      </div>
+    </div>
+    
+    <!-- localStorage Tab -->
+    <div id="local-storage" class="tab-content">
+      <div class="subtitle">localStorage: synchronous, ~5MB limit</div>
+      <div class="storage-controls">
+        <input type="text" id="ls-key" placeholder="Key">
+        <input type="text" id="ls-value" placeholder="Value">
+        <button id="ls-save">Save</button>
+        <button id="ls-get">Get</button>
+        <button id="ls-delete">Delete</button>
+        <button id="ls-clear">Clear All</button>
+      </div>
+      <div id="ls-data" class="data-display">No data</div>
+    </div>
+    
+    <!-- IndexedDB Tab -->
+    <div id="indexed-db" class="tab-content">
+      <div class="subtitle">IndexedDB: asynchronous, structured, large storage</div>
+      <div class="storage-controls">
+        <input type="text" id="idb-key" placeholder="Key (numeric ID)">
+        <textarea id="idb-value" placeholder="Value (JSON object)" rows="3"></textarea>
+        <button id="idb-save">Save</button>
+        <button id="idb-get">Get</button>
+        <button id="idb-delete">Delete</button>
+        <button id="idb-clear">Clear All</button>
+      </div>
+      <div id="idb-data" class="data-display">No data</div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
